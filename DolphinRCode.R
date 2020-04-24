@@ -93,7 +93,7 @@ mydata = myFreqData1
 summary(mydata)
  unclass(mydata)   
 #remove NAs
- myDataClean = na.omit(myBin_A)
+ myDataClean = na.omit(mydata)
  dim(myDataClean)
  scaled_data = as.matrix(scale(myDataClean))
  #k mean clusters
