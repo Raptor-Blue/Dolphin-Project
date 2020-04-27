@@ -24,8 +24,8 @@ binFreqTable(myFreqData1,10)
 mydataA <- sort(abs(myFreqData1))
 
 #Calculates root mean square (RMS) amplitude in overlapping frames, providing an envelope of
-RMS amplitude as a measure of sound intensity
-
+#RMS amplitude as a measure of sound intensity
+library(soundgen)
 getRMS(
     myFreqData1,
     samplingRate = 200,
