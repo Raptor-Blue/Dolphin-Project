@@ -1,4 +1,5 @@
 #Start Code
+#you need to have the xtrain data to do this
 library(reticulate)
 np <- import("numpy")
 matTrain <- np$load("DOCC10_train/DOCC10_Xtrain.npy")
@@ -25,6 +26,7 @@ mydataA <- sort(abs(myFreqData1))
 
 #Calculates root mean square (RMS) amplitude in overlapping frames, providing an envelope of
 #RMS amplitude as a measure of sound intensity
+install.packages("soundgen")
 library(soundgen)
 getRMS(
     myFreqData1,
@@ -48,6 +50,8 @@ getRMS(
 
 hist(myFreqData1, main = "Dolphin Click Set A", xlab="Time", ylab = "Frequency", col = "darkmagenta",freq=FALSE)
 # colorful plot with colors by group showing clusters between echolocation clicks
+
+
 plot(myFreqData1, timeData1, pch = 15, col = rainbow(10))
 
 #Fourier Frequency Function - that I could not get to work
@@ -70,7 +74,11 @@ dt <- 0.01 #s
  Yr <- Re(Y)
  Yi <- Im(Y)
 #plotting
- layout(matrix(c(1,2),2,1,byrow=TRUE))
+
+ #inside # does not run for me -Dylan
+layout(matrix(c(1,2),2,1,byrow=TRUE))
+
+
 plot(f[1:length(f)/2],mag[1:length(f)/2],type="l",xlab= "Frequency (kHz)",ylab= "Amplitudes") 
 grid(NULL,NULL, col = "lightgray", lty = "dotted",lwd = 1) 
 
@@ -89,9 +97,12 @@ grid(NULL,NULL, col = "lightgray", lty = "dotted",lwd = 1)
 
 
 
+
+
+
 #Kmeans alt method
-#mydata = myFreqData1
-# mydata = as.data.frame(unclass(mydata))
+mydata = myFreqData1
+ mydata = as.data.frame(unclass(mydata))
  dim(mydata)
 [1] 101   1
 summary(mydata)
@@ -116,12 +127,14 @@ plot(1:k.max, wss,
      ylab="Total within-clusters sum of squares")
 
 # convert frequency data to music notes
+
+##############where did posdata1 and timedata4 come from
 s = HzToSemitones(posData1, ref = 0.5109875)
 notesDict$note[1 + round(s)]
 
 #getting rid of Infinity values for time data
 timeData4[timeData4==-Inf]<- 0
-
+###########################################
 #turns clicks into audio tones
 fart(
 glottis = c(50, 200),
@@ -133,6 +146,44 @@ samplingRate = 16000,
 play = TRUE
 plot = FALSE
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #continues exploratory analisis of the data to look for additional helpful information
 
