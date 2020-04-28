@@ -187,71 +187,84 @@ plot = FALSE
 
 #continues exploratory analisis of the data to look for additional helpful information
 
-#mydata2 = myFreqData1
-#mydata2 = as.data.frame(unclass(mydata))
-# plot(1:k.max, wss,
-#+      type="b", pch = 19, frame = FALSE, 
-#+      xlab="Number of clusters K",
-#+      ylab="Total within-clusters sum of squares")
-#install.packages(cluster)
-#install.packages("cluster")
-#library(cluster)
+mydata2 = myFreqData1
+mydata2 = as.data.frame(unclass(mydata))
+ plot(1:k.max, wss,
++      type="b", pch = 19, frame = FALSE, 
++      xlab="Number of clusters K",
++      ylab="Total within-clusters sum of squares")
+library(cluster)
 
 #could not get next to work 
 #clusplot(myDataClean, fit$cluster, color=TRUE, shade=TRUE,
 #+    labels=2, lines=0))
-#install.packages("pvclust")
+install.packages("pvclust")
 
-#library(pvclust)
+library(pvclust)
 #next would not work either because n>=2 objects to cluster
  #fit <- pvclust(myDataClean, method.hclust="ward",
 #+    method.dist="euclidean")
 
-#fit <- kmeans(mydata2, 5) 
-# aggregate(mydata2,by=list(fit$cluster),FUN=mean)
-#  Group.1         V1
-#1       1  0.1020565
-#2       2 -0.3951672
-#3       3 -1.2224456
-#4       4  0.8584228
-#5       5  1.7302794
-# mydata2 <- data.frame(mydata2, fit$cluster)
-# d <- dist(mydata2, method = "euclidean")
-# fit <- hclust(d, method="ward")
-#The "ward" method has been renamed to "ward.D"; note new "ward.D2"
-# plot(fit)
-# groups <- cutree(fit, k=5) 
-# rect.hclust(fit, k=5, border="red")
-# library(pvclust)
-# fit <- pvclust(mydata, method.hclust="ward",
-#+                method.dist="euclidean")
-#The "ward" method has been renamed to "ward.D"; note new "ward.D2"
-#Error in hclust(distance, method = method.hclust) : 
-#  must have n >= 2 objects to cluster
+fit <- kmeans(mydata2, 5) 
+aggregate(mydata2,by=list(fit$cluster),FUN=mean)
+ mydata2 <- data.frame(mydata2, fit$cluster)
+ d <- dist(mydata2, method = "euclidean")
+fit <- hclust(d, method="ward")
+ plot(fit)
+groups <- cutree(fit, k=5) 
+rect.hclust(fit, k=5, border="red")
+library(pvclust)
 
-
-#fit <- pvclust(mydata2, method.hclust="ward",
-#+                method.dist="euclidean")
+fit <- pvclust(mydata2, method.hclust="ward",
++                method.dist="euclidean")
 
 #Model based approaches assume a variety of data models and apply maximum likelihood estimation and Bayes criteria to identify the most likely model and number of cluster
-
-#fit <- Mclust(mydata2)
-#plot(fit)
+install.packages("mclust")
+library(mclust)
+fit <- Mclust(mydata2)
+plot(fit)
 
 
 #my attempt to get get a nice kmeans clustering graph to show groupings of points thus far but am stuck on fvizcluster
-#install.packages("tidyverse")
-#install.packages("cluster")
-#install.packages("factoextra")
-#test2<-myFreqData1
-#test2=as.data.fram(unclass(test2))
-#dim(test2)
-#test2C=na.omit(test2)
-#test2C<-scale(test2C)
-#head(test2C)
-#k2<-kmeans(test2C,5,nstart=25)
-#str(k2)
-#fvis_cluster(k2,data=test2C)
+install.packages("tidyverse")
+install.packages("cluster")
+install.packages("factoextra")
+library(tidyverse)
+library(cluster)
+library(factoextra)
+test2<-myFreqData1
+test2=as.data.frame(unclass(test2))
+dim(test2)
+test2C=na.omit(test2)
+test2C<-scale(test2C)
+head(test2C)
+k<-kmeans(test2C,5,nstart=25)
+str(k)
+# error about not having an x and y becuase of how limited data is fvis_cluster(k,data=test2C)
+#trying a bunch of methods to see withiness and to get some visuals to see if anything interesting about the clusters shows up
+myDataClean <- scale(myDataClean)
+wss <- (nrow(myDataClean)-1)*sum(apply(myDataClean,2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(myDataClean,centers=i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+fit <- kmeans(myDataClean, 5)
+aggregate(myDataClean,by=list(fit$cluster),FUN=mean)
+myDataClean <- data.frame(myDataClean, fit$cluster)
+dis <- dist(myDataClean, method = "euclidean")
+fit <- hclust(dis, method="ward")
+plot(fit) 
+
+fit <- Mclust(myDataClean)
+plot(fit) # plot results
+summary(fit)
+clusplot(myDataClean, fit$cluster, color=TRUE, shade=TRUE,labels=2, lines=0)
+library(fpc)
+plotcluster(myDataClean, fit$cluster)
+
+
+
+
+
+
 
 
 
