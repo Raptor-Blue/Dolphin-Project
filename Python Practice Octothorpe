@@ -1,0 +1,62 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled2.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyMso4cdXMStyfVpHVO4ABA6",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Raptor-Blue/Dolphin-Project/blob/master/Python%20Practice%20Octothorpe\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "iiEl80yHeWlW"
+      },
+      "source": [
+        "Code Courtesy of Zed A. Shaw's Learn Python the Hard Way"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "kwxeiggSeXn1",
+        "outputId": "1dde1e0d-cf63-4a85-8b3f-13b3f97e4229"
+      },
+      "source": [
+        "print(\"The official name for this # sign is OCTOTHORPE\")\r\n",
+        "print(\"Its a simplified cursive symbol for a latin term dating back to the 14th century and its still popular today\")"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "The official name for this # sign is OCTOTHORPE\n",
+            "Its a simplified cursive symbol for a latin term dating back to the 14th century and its still popular today\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
